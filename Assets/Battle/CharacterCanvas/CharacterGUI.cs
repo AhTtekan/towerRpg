@@ -203,7 +203,7 @@ public class CharacterGUI : MonoBehaviour {
     }
 }
 
-public class Character
+public class Character : ScriptableObject
 {
     public string Name { get; set; }
     public Sprite Portrait { get; set; }
