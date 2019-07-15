@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class CharacterGUI : MonoBehaviour {
 
+    [SerializeField]
     Character character;
 
     [SerializeField]
@@ -63,11 +64,11 @@ public class CharacterGUI : MonoBehaviour {
             return APBase.transform.Find("APFill").GetComponent<Image>();
         }
     }
-    TextMeshProUGUI HPText
+    TextMeshPro HPText
     {
         get
         {
-            return transform.Find("HPText").gameObject.GetComponent<TextMeshProUGUI>();
+            return transform.Find("HPText").gameObject.GetComponent<TextMeshPro>();
         }
     }
     #endregion
@@ -78,19 +79,15 @@ public class CharacterGUI : MonoBehaviour {
         ScaleHPTo1();
         SetHPBars();
 	}
+
     private void Start()
     {
         //BattleManager.instance.battleSelectionObservers += Dim;
-    }
-
-    public void Begin(Character c)
-    {
-        character = c;
-
-        HPText.text = c.HP_Max.ToString();
+    
+        HPText.text = character.HP_Max.ToString();
         HPBarCurrent.fillAmount = HPBarDamaging.fillAmount = character.HP_Current / character.HP_Max;
-        transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = c.Portrait;
-        transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = character.Name;
+        transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = character.Portrait;
+        transform.Find("NameText").GetComponent<TextMeshPro>().text = character.Name;
     }
 
     public void Dim(Character c)
@@ -201,13 +198,4 @@ public class CharacterGUI : MonoBehaviour {
         HPBarDamaged.rectTransform.localScale = scale;
         HPBarDamaging.rectTransform.localScale = scale;
     }
-}
-
-public class Character : ScriptableObject
-{
-    public string Name { get; set; }
-    public Sprite Portrait { get; set; }
-    public float AP_Current { get; set; }
-    public int HP_Current { get; set; }
-    public int HP_Max { get; set; }
 }
