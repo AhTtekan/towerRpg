@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,5 +63,10 @@ public static class MathUtility
     {
         int r = RR.Next(lowerBound, upperBound);
         return r;
+    }
+
+    internal static int Clamp(int value, int min, int max)
+    {
+        return (value < min) ? min : (value > max) ? max : value;
     }
 }

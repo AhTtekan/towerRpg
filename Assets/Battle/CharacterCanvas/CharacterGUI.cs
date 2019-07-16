@@ -64,11 +64,11 @@ public class CharacterGUI : MonoBehaviour {
             return APBase.transform.Find("APFill").GetComponent<Image>();
         }
     }
-    TextMeshPro HPText
+    TextMeshProUGUI HPText
     {
         get
         {
-            return transform.Find("HPText").gameObject.GetComponent<TextMeshPro>();
+            return transform.Find("HPText").gameObject.GetComponent<TextMeshProUGUI>();
         }
     }
     #endregion
@@ -87,7 +87,7 @@ public class CharacterGUI : MonoBehaviour {
         HPText.text = character.HP_Max.ToString();
         HPBarCurrent.fillAmount = HPBarDamaging.fillAmount = character.HP_Current / character.HP_Max;
         transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = character.Portrait;
-        transform.Find("NameText").GetComponent<TextMeshPro>().text = character.Name;
+        transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = character.Name;
     }
 
     public void Dim(Character c)
@@ -100,7 +100,7 @@ public class CharacterGUI : MonoBehaviour {
 
     void UpdateAP()
     {
-        int intAP = MathUtility.Truncate(character.AP_Current);
+        int intAP =  MathUtility.Clamp(MathUtility.Truncate(character.AP_Current), 0, 10);
         APBase.sprite = ApBaseSprites[intAP];
         APFill.sprite = ApFillSprites[intAP];
 
