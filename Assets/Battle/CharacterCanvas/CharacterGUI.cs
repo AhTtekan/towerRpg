@@ -1,10 +1,10 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterGUI : MonoBehaviour {
-
-    [SerializeField]
+    
     Character character;
 
     [SerializeField]
@@ -21,6 +21,17 @@ public class CharacterGUI : MonoBehaviour {
             return transform.Find("HPBar").gameObject;
         }
     }
+
+    internal void SetCharacter(Character character)
+    {
+        this.character = character;
+
+        HPText.text = character.HP_Max.ToString();
+        HPBarCurrent.fillAmount = HPBarDamaging.fillAmount = character.HP_Current / character.HP_Max;
+        transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = SpriteManager.Instance.CharacterPortraitSprites.characterPortraits[character.PortraitId];
+        transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = character.Name;
+    }
+
     Image HPBarCurrent
     {
         get
@@ -84,10 +95,10 @@ public class CharacterGUI : MonoBehaviour {
     {
         //BattleManager.instance.battleSelectionObservers += Dim;
     
-        HPText.text = character.HP_Max.ToString();
-        HPBarCurrent.fillAmount = HPBarDamaging.fillAmount = character.HP_Current / character.HP_Max;
-        transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = character.Portrait;
-        transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = character.Name;
+        //HPText.text = character.HP_Max.ToString();
+        //HPBarCurrent.fillAmount = HPBarDamaging.fillAmount = character.HP_Current / character.HP_Max;
+        //transform.Find("Burst").Find("Portrait").GetComponent<Image>().sprite = SpriteManager.Instance.CharacterPortraitSprites.characterPortraits[character.PortraitId];
+        //transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = character.Name;
     }
 
     public void Dim(Character c)
@@ -100,19 +111,19 @@ public class CharacterGUI : MonoBehaviour {
 
     void UpdateAP()
     {
-        int intAP =  MathUtility.Clamp(MathUtility.Truncate(character.AP_Current), 0, 10);
+        int intAP =  MathUtility.Clamp(MathUtility.Truncate(character.APCore.AP_Current), 0, 10);
         APBase.sprite = ApBaseSprites[intAP];
         APFill.sprite = ApFillSprites[intAP];
 
         if (intAP > 0)
         {
-            APFill.fillAmount = character.AP_Current % intAP;
+            APFill.fillAmount = character.APCore.AP_Current % intAP;
         }
         else
         {
-            APFill.fillAmount = character.AP_Current;
+            APFill.fillAmount = character.APCore.AP_Current;
         }
-        if (character.AP_Current == 10f)
+        if (character.APCore.AP_Current == 10f)
         {
             APFill.fillAmount = 1;
         }
