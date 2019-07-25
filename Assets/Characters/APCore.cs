@@ -2,6 +2,19 @@
 public class APCore
 {
     public int APBuildRateInSeconds { get; set; }
-    public float AP_Current { get; set; }
-    public float AP_Max;
+
+    public float AP_Current
+    {
+        get
+        {
+            return ap_Current.Clamp( 0, 10);
+        }
+        set
+        {
+            ap_Current = value;
+        }
+    }
+    private float ap_Current;
+
+    public float AP_Max { get; set; }
 }

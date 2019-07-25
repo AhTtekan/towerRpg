@@ -7,10 +7,12 @@ public class CharacterGUI : MonoBehaviour {
     
     Character character;
 
+#pragma warning disable IDE0044 // Add readonly modifier
     [SerializeField]
     private Sprite[] ApBaseSprites;
     [SerializeField]
     private Sprite[] ApFillSprites;
+#pragma warning restore IDE0044 // Add readonly modifier
 
     #region Accessors
     GameObject HPBar
@@ -111,10 +113,10 @@ public class CharacterGUI : MonoBehaviour {
 
     void UpdateAP()
     {
-        int intAP =  MathUtility.Clamp(MathUtility.Truncate(character.APCore.AP_Current), 0, 10);
+        int intAP =  MathUtility.Truncate(character.APCore.AP_Current).Clamp(0, 10);
         APBase.sprite = ApBaseSprites[intAP];
         APFill.sprite = ApFillSprites[intAP];
-
+        
         if (intAP > 0)
         {
             APFill.fillAmount = character.APCore.AP_Current % intAP;
@@ -123,11 +125,11 @@ public class CharacterGUI : MonoBehaviour {
         {
             APFill.fillAmount = character.APCore.AP_Current;
         }
+
         if (character.APCore.AP_Current == 10f)
         {
             APFill.fillAmount = 1;
         }
-        return;
     }
 
     void ScaleHPTo1()

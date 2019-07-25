@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 3339844917592511588}
   - component: {fileID: 3339844917592511586}
   - component: {fileID: 3339844917592511587}
-  - component: {fileID: 3339844917592511590}
   m_Layer: 0
   m_Name: Valdun
   m_TagString: Player
@@ -199,18 +198,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3339844917592511590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3339844917592511592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0581306606800d74ba895456be45cc6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3339844918110558941
 GameObject:
   m_ObjectHideFlags: 0
