@@ -52,8 +52,8 @@ public class CharactersManager : SingletonBase<CharactersManager>
             PortraitId = 0
         };
         v.APCore.AP_Max = 10;
-        v.APCore.APBuildRateInSeconds = 7;
-        v.SpeedCore.Agility = 75;
+        v.APCore.APBuildRateInSeconds = 10;
+        v.SpeedCore.Agility = 200;
         Character r = new Character
         {
             HP_Current = 100,
@@ -62,8 +62,8 @@ public class CharactersManager : SingletonBase<CharactersManager>
             PortraitId = 1
         };
         r.APCore.AP_Max = 10;
-        r.APCore.APBuildRateInSeconds = 7;
-        r.SpeedCore.Agility = 5;
+        r.APCore.APBuildRateInSeconds = 10;
+        r.SpeedCore.Agility = 120;
         Character n = new Character
         {
             HP_Current = 100,
@@ -72,8 +72,8 @@ public class CharactersManager : SingletonBase<CharactersManager>
             PortraitId = 2
         };
         n.APCore.AP_Max = 10;
-        n.APCore.APBuildRateInSeconds = 7;
-        n.SpeedCore.Agility = 12;
+        n.APCore.APBuildRateInSeconds = 10;
+        n.SpeedCore.Agility = 90;
         Character c = new Character
         {
             HP_Current = 100,
@@ -82,8 +82,8 @@ public class CharactersManager : SingletonBase<CharactersManager>
             PortraitId = 3
         };
         c.APCore.AP_Max = 10;
-        c.APCore.APBuildRateInSeconds = 7;
-        c.SpeedCore.Agility = 28;
+        c.APCore.APBuildRateInSeconds = 10;
+        c.SpeedCore.Agility = 35;
 
         Character[] chars = new Character[] { v, r, n, c };
 
