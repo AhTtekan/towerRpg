@@ -44,6 +44,7 @@ public static class GUIUtility
 public static class MathUtility
 {
     public static System.Random RR = new System.Random();
+
     public static int Truncate(float d)
     {
         int output = 0;

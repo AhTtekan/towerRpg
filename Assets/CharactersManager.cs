@@ -18,8 +18,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
             return _chars;
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
     }
@@ -41,6 +40,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
 
         return chars;
     }
+
     private void CreateTestCharacters()
     {
         var path = Application.persistentDataPath + "/characters.char";
