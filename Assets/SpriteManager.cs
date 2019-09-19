@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SpriteManager : SingletonBase<SpriteManager>
+﻿public class SpriteManager : SingletonBase<SpriteManager>
 {
 
     public CharacterPortraitSprites CharacterPortraitSprites;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public static class Utility
@@ -17,7 +14,6 @@ public static class Utility
 
 public static class GUIUtility
     {
-
         public static void DimGUI(Transform t, float alpha = 0.7f)
         {
             foreach (Transform child in t)

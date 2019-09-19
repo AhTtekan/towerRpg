@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 //[CreateAssetMenu(fileName = "Character", menuName = "ScriptableObjects/Character")]
 [Serializable]
