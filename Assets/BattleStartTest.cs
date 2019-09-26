@@ -11,6 +11,13 @@ public class BattleStartTest : MonoBehaviour
         _calculators = new APRateCalculator[charGUIs.Length];
         for (int i = 0; i < charGUIs.Length; i++)
         {
+            if(CharactersManager.Instance.Chars.Length < i)
+            {
+                charGUIs[i].enabled = false;
+
+                continue;
+            }
+
             Character character = CharactersManager.Instance.Chars[i];
             character.APCore.AP_Current = 0;
 
