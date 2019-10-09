@@ -51,11 +51,11 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
         {
             if(direction == Vector3.left)
             {
-                BattleManager.Instance.SelectedCharacterIndex--;
+                BattleStateManager.Instance.SelectedCharacterIndex--;
             }
             else if(direction == Vector3.right)
             {
-                BattleManager.Instance.SelectedCharacterIndex++;
+                BattleStateManager.Instance.SelectedCharacterIndex++;
             }
         }
     }

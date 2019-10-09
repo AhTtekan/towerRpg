@@ -33,8 +33,12 @@ public class APRateCalculator
         {
             yield return null;
 
-            //TODO: check if AP growing
-            _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime;
+            var increment = GetIncrementAmount() + Time.deltaTime;
+
+            if (BattleStateManager.Instance.BattleStateCurrent == BattleStateManager.BattleState.Building)
+            {
+                _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime;
+            }
 
             if(_characterAPCore.AP_Current == 10)
             {
