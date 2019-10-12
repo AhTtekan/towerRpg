@@ -2,9 +2,11 @@
 
 public class BattleStateManager : SingletonBase<BattleStateManager>
 {
-    public int SelectedCharacterIndex { get { return SelectedCharacterIndex; } set { SelectedCharacterIndex = Wrap(value); } }
+    private int _selectedCharacterIndex;
+    public int SelectedCharacterIndex { get { return _selectedCharacterIndex; } set { _selectedCharacterIndex = Wrap(value); } }
 
-    public BattleState BattleStateCurrent { get { return BattleStateCurrent; }set { BattleStateCurrent = Clamp(value); } }
+    private BattleState _battleState;
+    public BattleState BattleStateCurrent { get { return _battleState; } set { _battleState = Clamp(value); } }
 
     private int Wrap(int value)
     {
