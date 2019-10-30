@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
@@ -9,7 +9,7 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
 
     public InputReader InputReader;
 
-    private GUISelectionState state;
+    private State state;
 
     //track input state here:
     //state one: select character
@@ -24,46 +24,80 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
         InputReader.OnCancel += RetractGUI;
         InputReader.OnMovement += GUIMovement;
 
-        state = GUISelectionState.None;
+        state = State.States(0);
     }
 
     void AdvanceGUI()
     {
-        var newState = state + 1;
-        if(Enum.IsDefined(typeof(GUISelectionState), newState))
-        {
-            state = newState;
-        }
+        state = State.States(state.Index + 1);
     }
 
     void RetractGUI()
     {
-        var newState = state - 1;
-        if(Enum.IsDefined(typeof(GUISelectionState), newState))
-        {
-            state = newState;
-        }
+        state = State.States(state.Index-1);
     }
 
     void GUIMovement(Vector3 direction)
     {
-        if(state == GUISelectionState.CharacterSelect)
+        state.GUIMoveFunc(direction);
+    }
+
+    public abstract class State
+    {
+        public abstract int Index { get; }
+
+        public abstract void GUIMoveFunc(Vector3 direction);
+
+        private static State[] _states;
+        public static State States(int index)
         {
-            if(direction == Vector3.left)
+            if(_states == null)
             {
-                BattleStateManager.Instance.SelectedCharacterIndex--;
+                var states = Assembly.GetAssembly(typeof(State)).GetTypes()
+                    .Where(t => typeof(State).IsAssignableFrom(t) && t.IsAbstract == false).ToArray();
+
+                _states = new State[states.Length];
+
+                for (int i = 0; i < states.Length; i++)
+                {
+                    State s = Activator.CreateInstance(states[i]) as State;
+                    _states[i] = s;
+                }
             }
-            else if(direction == Vector3.right)
-            {
-                BattleStateManager.Instance.SelectedCharacterIndex++;
-            }
+
+            index = MathUtility.Clamp(index, 0, _states.Length);
+
+            return _states.First(x => x.Index == index);
         }
     }
 
-    enum GUISelectionState
+    public class NonGUIState : State
     {
-        None,
-        CharacterSelect,
-        SelectionGUI
+        public override int Index => 0;
+
+        public override void GUIMoveFunc(Vector3 direction)
+        {
+            //no-op
+        }
+    }
+
+    public class CharacterSelectState : State
+    {
+        public override int Index => 1;
+
+        public override void GUIMoveFunc(Vector3 direction)
+        {
+            BattleStateManager.Instance.SelectedCharacterIndex += Convert.ToInt32(direction.x);
+        }
+    }
+
+    public class SelectionGUIState : State
+    {
+        public override int Index => 2;
+
+        public override void GUIMoveFunc(Vector3 direction)
+        {
+            //TODO: 
+        }
     }
 }

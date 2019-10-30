@@ -35,10 +35,10 @@ public class APRateCalculator
 
             var increment = GetIncrementAmount() + Time.deltaTime;
 
-            if (BattleStateManager.Instance.BattleStateCurrent == BattleStateManager.BattleState.Building)
-            {
-                _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime;
-            }
+
+                _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime * 
+                BattleStateManager.Instance.BattleStateCurrent.APBuildRate;
+            
 
             if(_characterAPCore.AP_Current == 10)
             {
