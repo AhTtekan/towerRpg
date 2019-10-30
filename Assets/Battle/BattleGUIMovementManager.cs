@@ -15,16 +15,16 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
     //state one: select character
     //state two: selection GUI
 
-        //function enable GUIBattleSelector and pass in the referencial character?
+    //function enable GUIBattleSelector and pass in the referencial character?
 
     // Start is called before the first frame update
     void Start()
     {
-        InputReader.OnSubmit += AdvanceGUI;
-        InputReader.OnCancel += RetractGUI;
-        InputReader.OnMovement += GUIMovement;
+        //InputReader.OnSubmit += AdvanceGUI;
+        //InputReader.OnCancel += RetractGUI;
+        //InputReader.OnMovement += GUIMovement;
 
-        state = State.States(0);
+        //state = State.States(0);
     }
 
     void AdvanceGUI()
@@ -34,7 +34,7 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
 
     void RetractGUI()
     {
-        state = State.States(state.Index-1);
+        state = State.States(state.Index - 1);
     }
 
     void GUIMovement(Vector3 direction)
@@ -51,7 +51,7 @@ public class BattleGUIMovementManager : SingletonBase<BattleGUIMovementManager>
         private static State[] _states;
         public static State States(int index)
         {
-            if(_states == null)
+            if (_states == null)
             {
                 var states = Assembly.GetAssembly(typeof(State)).GetTypes()
                     .Where(t => typeof(State).IsAssignableFrom(t) && t.IsAbstract == false).ToArray();

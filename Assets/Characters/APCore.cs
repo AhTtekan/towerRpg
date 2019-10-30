@@ -7,7 +7,7 @@ public class APCore
     {
         get
         {
-            return ap_Current.Clamp( 0, 10);
+            return ap_Current.Clamp(0, AP_Max);
         }
         set
         {

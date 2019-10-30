@@ -12,13 +12,14 @@ public class CharactersManager : SingletonBase<CharactersManager>
     private Character[] _chars;
     public Character[] Chars
     {
-        get {
+        get
+        {
             if (_chars == null)
                 _chars = LoadChars();
             return _chars;
         }
     }
-    
+
     void Update()
     {
     }
@@ -53,7 +54,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
         };
         v.APCore.AP_Max = 10;
         v.APCore.APBuildRateInSeconds = 10;
-        v.SpeedCore.Agility = 200;
+        v.SpeedCore.Agility = 21;
         Character r = new Character
         {
             HP_Current = 100,
@@ -63,7 +64,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
         };
         r.APCore.AP_Max = 10;
         r.APCore.APBuildRateInSeconds = 10;
-        r.SpeedCore.Agility = 120;
+        r.SpeedCore.Agility = 18;
         Character n = new Character
         {
             HP_Current = 100,
@@ -73,7 +74,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
         };
         n.APCore.AP_Max = 10;
         n.APCore.APBuildRateInSeconds = 10;
-        n.SpeedCore.Agility = 90;
+        n.SpeedCore.Agility = 35;
         Character c = new Character
         {
             HP_Current = 100,
@@ -83,7 +84,7 @@ public class CharactersManager : SingletonBase<CharactersManager>
         };
         c.APCore.AP_Max = 10;
         c.APCore.APBuildRateInSeconds = 10;
-        c.SpeedCore.Agility = 35;
+        c.SpeedCore.Agility = 50;
 
         Character[] chars = new Character[] { v, r, n, c };
 

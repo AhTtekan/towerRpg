@@ -18,7 +18,7 @@ public class APRateCalculator
 
         float amount = 3.87981F / (1F + (-(0.66F * ((float)Math.Pow(Math.E, ((-0.005) * _characterSpeedCore.Agility))))));
 
-        return 1f / (amount / 10f);
+        return 1f / (amount / 5.6f);
     }
 
     public void Kill()
@@ -33,16 +33,12 @@ public class APRateCalculator
         {
             yield return null;
 
-            var increment = GetIncrementAmount() + Time.deltaTime;
+            _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime *
+            BattleStateManager.Instance.BattleStateCurrent.APBuildRate;
 
-
-                _characterAPCore.AP_Current += GetIncrementAmount() * Time.deltaTime * 
-                BattleStateManager.Instance.BattleStateCurrent.APBuildRate;
-            
-
-            if(_characterAPCore.AP_Current == 10)
+            if (_characterAPCore.AP_Current == _characterAPCore.AP_Max)
             {
-                Debug.Log("Hit 10 AP in " + (DateTime.Now - start).TotalSeconds + " with Agility = "+ _characterSpeedCore.Agility);
+                Debug.Log($"Hit {_characterAPCore.AP_Max} AP in {(DateTime.Now - start).TotalSeconds} with Agility = {_characterSpeedCore.Agility}");
                 break;
             }
         }
