@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EncountersManager : MonoBehaviour// : SingletonBase<EncountersManager>
 {
@@ -26,7 +24,7 @@ public class EncountersManager : MonoBehaviour// : SingletonBase<EncountersManag
         }
     }
 
-    IEnumerable<Encounter> encounters;
+    Encounter[] encounters;
 
     private EncountersManager() { }
 
@@ -40,7 +38,7 @@ public class EncountersManager : MonoBehaviour// : SingletonBase<EncountersManag
 
     }
 
-    internal void UpdateEncounters(IEnumerable<Encounter> newEncounters)
+    internal void UpdateEncounters(Encounter[] newEncounters)
     {
         encounters = newEncounters;
     }
@@ -59,12 +57,23 @@ public class EncountersManager : MonoBehaviour// : SingletonBase<EncountersManag
         timeLeftUntilEncounter -= Time.deltaTime;
         if(timeLeftUntilEncounter <= 0)
         {
-            RollNextEncounterTime();
-
-            MapLocationManager.Instance.SetLocation();
-
-            SceneManager.LoadScene((int)ScenesEnum.BattleScene);
+            StartEncounter();
         }
+    }
+
+    private void StartEncounter()
+    {
+        RollNextEncounterTime();
+
+        MapLocationManager.Instance.SetLocation();
+
+        // Choose Encounter based on weight
+        Encounter encounter = (Encounter)MathUtility.GetRandomWeightedObject(encounters);
+        
+        Debug.Log(string.Format("Battle Started! Encounter chosen: Enemies: {0}", string.Join(",",encounter.Enemies.Select(x => x.Name))));
+
+        // TODO: Implement battle scene (This is currently in a different Unity project being developed separately. Port in it later.)
+        // SceneManager.LoadScene((int)ScenesEnum.BattleScene);
     }
 
     protected void Awake()
@@ -79,13 +88,8 @@ public class EncountersManager : MonoBehaviour// : SingletonBase<EncountersManag
 
     private void Start()
     {
-        encounters = new List<Encounter> { new Encounter() };
+        // encounters = new Encounter[] { new Encounter() };
         RollNextEncounterTime();
     }
-    
-}
-
-internal class Encounter
-{
 }
 

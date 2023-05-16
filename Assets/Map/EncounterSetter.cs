@@ -30,6 +30,6 @@ public class EncounterSetter : MonoBehaviour
 
     private void Start()
     {
-        encounters = new Encounter[] { new Encounter() };
+        // encounters = new Encounter[] { new Encounter() };
     }
 }

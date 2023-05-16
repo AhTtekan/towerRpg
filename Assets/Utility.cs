@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public static class Utility
@@ -39,7 +40,7 @@ public static class GUIUtility
 
 public static class MathUtility
 {
-    public static System.Random RR = new System.Random();
+    public static Random RR = new Random();
 
     public static int Truncate(float d)
     {
@@ -56,10 +57,20 @@ public static class MathUtility
         return output;
     }
 
-    public static int Random(int lowerBound, int upperBound)
+    public static IWeighted GetRandomWeightedObject(IWeighted[] options)
     {
-        int r = RR.Next(lowerBound, upperBound);
-        return r;
+        int totalWeight = options.Sum(x => x.Weight), random = Random.Range(0, totalWeight), cumulativeWeight = 0;
+        foreach (var option in options)
+        {
+            cumulativeWeight += option.Weight;
+            Debug.Log("Random value is " + random + ", cumulative value is " + cumulativeWeight);
+            if (random < cumulativeWeight)
+            {
+                return option;
+            }
+        }
+
+        throw new System.Exception("Unable to find random weighted object.");
     }
 
     internal static int Clamp(this int value, int min, int max)
