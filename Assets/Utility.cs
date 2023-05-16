@@ -40,8 +40,6 @@ public static class GUIUtility
 
 public static class MathUtility
 {
-    public static Random RR = new Random();
-
     public static int Truncate(float d)
     {
         int output = 0;
@@ -63,7 +61,6 @@ public static class MathUtility
         foreach (var option in options)
         {
             cumulativeWeight += option.Weight;
-            Debug.Log("Random value is " + random + ", cumulative value is " + cumulativeWeight);
             if (random < cumulativeWeight)
             {
                 return option;
